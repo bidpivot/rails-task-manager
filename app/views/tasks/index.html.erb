@@ -1,0 +1,28 @@
+<h1>My Tasks</h1>
+<ul class="list-group">
+<% @tasks.each do |task| %>
+
+  <li>
+    <% if task[:completed]%>
+    <i class="fa-regular fa-square-check"></i>
+    <% else %>
+    <i class="fa-regular fa-square"></i>
+    <% end %>
+    <%= check_box_tag(task[:completed]) %> <!-- you need an if statement here and use font awesome square or square checked box -->
+    
+    <%= link_to task.title, task_path(task[:id])  %>
+    - Completed?  <%= task.completed %>
+    <%= link_to "Delete",
+    task_path(task),
+    class: 'btn btn-danger',
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+  </li>
+<% end %>
+</ul>
+<br>
+<%= link_to "➕ create new task",
+  new_path
+%>
+
+
+
